@@ -637,7 +637,7 @@ end
 if SERVER then
 
 	function ENT:SpawnFunction(ply, tr, ClassName)
-
+		if not ply:CheckLimit('peplus') then return end
 		if (!tr.Hit) then return end
 
 		local SpawnPos = tr.HitPos + tr.HitNormal * 10
@@ -654,7 +654,7 @@ if SERVER then
 		ent:Activate()
 
 		ent:DropToFloor()
-
+		ply:AddCount("peplus", ent)
 	return ent
 
 end

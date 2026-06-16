@@ -116,7 +116,7 @@ include("peplus/pcf_crash_prevention.lua")
 //Cleanup and limit
 cleanup.Register("peplus")
 if SERVER then
-	CreateConVar("sbox_maxpeplus", "10", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Maximum particle effects a single player can create")
+	CreateConVar("sbox_maxpeplus", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Maximum particle effects a single player can create")
 end
 
 

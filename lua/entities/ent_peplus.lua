@@ -2500,7 +2500,7 @@ if SERVER then
 	end
 
 	function GAMEMODE:PlayerSpawnedParticle(ply, name, pcf, path, ent)
-		ply:AddCount("peplus", ent)
+		--ply:AddCount("peplus", ent)
 	end
 
 end
