@@ -17,7 +17,6 @@ if CLIENT then
 			end
 
 			if not tool_gun_perms then
-				print(tool_gun_perms)
 				return 
 			end
 			--[[
