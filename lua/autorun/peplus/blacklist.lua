@@ -1,3 +1,4 @@
+AddCSLuaFile()
 if CLIENT then return end 
 local disablePrinting = CreateConVar("peplus_disable_blacklist_printing", "0", FCVAR_NONE, "\"this particle effect is blacklisted\"", 0, 1)
 
