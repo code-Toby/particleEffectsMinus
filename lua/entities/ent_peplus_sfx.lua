@@ -663,7 +663,7 @@ if SERVER then
 		ent:Activate()
 
 		ent:DropToFloor()
-		ply:AddCount("peplus", ent)
+		--ply:AddCount("peplus", ent)
 	return ent
 
 end

@@ -2492,6 +2492,7 @@ if SERVER then
 			end
 		end
 
+		ply:AddCount("peplus", p)
 		return p
 
 	end
