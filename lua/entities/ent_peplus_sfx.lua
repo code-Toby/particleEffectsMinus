@@ -18,6 +18,12 @@ ENT.PEPlus_SpecialEffect	= true
 
 
 
+local function setOwner(ent, ply)
+	if SERVER then
+		if CPPI then ent:CPPISetOwner(ply) 
+		else ent:SetOwner(ply) end
+	end
+end
 
 function ENT:Initialize()
 
