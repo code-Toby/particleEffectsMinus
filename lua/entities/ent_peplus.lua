@@ -10,7 +10,7 @@ ENT.PEPlus_Ent			= true //lets us detect if an ent is an ent_peplus without havi
 
 if CLIENT then
 	language.Add("Undone_PEPlus", "Undone Particle Effect")
-    	language.Add("Cleanup_peplus", "Particle Effects")
+    language.Add("Cleanup_peplus", "Particle Effects")
    	language.Add("Cleaned_peplus", "Cleaned up all Particle Effects")
 	language.Add("SBoxLimit_peplus", "You've hit the Particle Effect limit!")
    	language.Add("max_peplus", "Max Particle Effects:")
@@ -1353,6 +1353,8 @@ else
 		g:SetPos(Vector(p.pos.x, p.pos.y, height))
 		g:SetAngles(p.ang)
 
+		setOwner(g, ply)
+
 		oldconst:RemoveCallOnRemove("PEPlus_Ent_UnmergeOnUndo")
 		oldconst:Remove()
 		//Check if we want to clear DeleteOnRemove or not - if the same particle has another cpoint attached to the same entity, then we want to maintain
@@ -1426,7 +1428,7 @@ else
 		end
 
 		local parent = nil
-		grips, parent = PEPlus_SpawnParticleGripPoints(grips, pos)
+		grips, parent = PEPlus_SpawnParticleGripPoints(grips, pos, ply)
 
 		self:SetSpecialEffectParent(nil)
 		for k, v in pairs (grips) do
@@ -2302,7 +2304,12 @@ end
 
 if SERVER then
 
-	function PEPlus_SpawnParticleGripPoints(grips, localpos)
+	local function setOwner(ent, ply)
+		if CPPI then ent:CPPISetOwner(ply) 
+		else ent:SetOwner(ply) end
+	end
+
+	function PEPlus_SpawnParticleGripPoints(grips, localpos, ply)
 		
 		local parent = nil
 		for k, pos in pairs (grips) do
@@ -2310,6 +2317,8 @@ if SERVER then
 			if IsValid(g) then
 				g:SetPos(pos + localpos)
 				g:Spawn()
+
+				setOwner(g, ply)
 				grips[k] = g
 				//tab[k].ent = g //no longer valid now that the grip spawning was moved out of SpawnParticle - i think the constraint should handle this anyway
 				if !IsValid(parent) then parent = g end
@@ -2431,7 +2440,7 @@ if SERVER then
 		end
 
 		local parent = nil
-		grips, parent = PEPlus_SpawnParticleGripPoints(grips, pos)
+		grips, parent = PEPlus_SpawnParticleGripPoints(grips, pos, ply)
 
 		local p = ents.Create("ent_peplus")
 		if !IsValid(p) then return end
@@ -2461,6 +2470,8 @@ if SERVER then
 		p:SetPauseTime(-1)
 		p.ParticleInfo = tab
 		p:Spawn()
+
+		setOwner(p, ply)
 
 		for k, v in pairs (grips) do
 			constraint.PEPlus_Ent(p, v, k, parent == v, ply)

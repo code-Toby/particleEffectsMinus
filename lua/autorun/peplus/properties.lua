@@ -7,25 +7,6 @@ if CLIENT then
 	function OpenPEPlusEditor(ent)
 
 		if IsValid(ent.PEPlusWindow) then return end
-		if Warden then
-			local ent_owner = Warden.GetOwner(ent)
-			local tool_gun_perms = false
-			if LocalPlayer() == ent_owner then
-				tool_gun_perms = true 
-			else
-				tool_gun_perms = Warden.CheckPermission(LocalPlayer(), ent_owner, Warden.PERMISSION_TOOL)
-			end
-
-			if not tool_gun_perms then
-				return 
-			end
-			--[[
-			if  != LocalPlayer() then
-				print('aaaa')
-				return
-			end
-			--]]
-		end 
 
 		local width = 367 //width of 367 nicely fits color picker
 		local height = 400
@@ -72,10 +53,13 @@ end
 
 //Make these funcs global so advbonemerge tool dropdown can use them too
 
+-- hide options from unfiltered players
 PEPlus_EditProperty_Filter = function(self, ent, ply)
 
 	if !IsValid(ent) then return false end
 	if !gamemode.Call("CanProperty", ply, "editpeplus", ent) then return false end
+	--if CPPI and not ent:CPPICanTool(ply) then return false end --CPPICanTool does not exist in the CLIENT realm :(
+	if Warden and not Warden.HasPermission(ent, ply, Warden.PERMISSION_TOOL) then return false end --selfishly use warden in this case
 
 	if !istable(ent.PEPlus_ParticleEnts) then return false end
 	local count = table.Count(ent.PEPlus_ParticleEnts) 

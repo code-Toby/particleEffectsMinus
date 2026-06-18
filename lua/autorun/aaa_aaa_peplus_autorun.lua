@@ -109,6 +109,7 @@ include("peplus/pcf_processing.lua")
 include("peplus/spawnmenu.lua")
 include("peplus/properties.lua")
 include("peplus/pcf_crash_prevention.lua")
+include("peplus/blacklist.lua")
 
 
 
