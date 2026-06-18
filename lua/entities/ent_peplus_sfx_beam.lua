@@ -5,7 +5,7 @@ ENT.PrintName			= "Beam Effect"
 ENT.Category			= "Particle Effects+: Special Effects"
 ENT.Information			= "Works like a laser pointer, continuously moving attached particle effects to where the \"beam\" is pointing."
 
-ENT.Spawnable			= true
+ENT.Spawnable			= false
 
 ENT.PEPlus_ShortName		= "Beam"
 ENT.SpecialEffectRoles		= {

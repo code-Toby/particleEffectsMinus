@@ -5,7 +5,7 @@ ENT.PrintName			= "Projectile Effect"
 ENT.Category			= "Particle Effects+: Special Effects"
 ENT.Information			= "Launches props with attached particle effects, which then play more effects on hit or when they expire."
 
-ENT.Spawnable			= true
+ENT.Spawnable			= false
 
 ENT.PEPlus_ShortName		= "Projectile"
 ENT.SpecialEffectRoles		= {

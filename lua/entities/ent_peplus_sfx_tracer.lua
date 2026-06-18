@@ -5,7 +5,7 @@ ENT.PrintName			= "Tracer Effect"
 ENT.Category			= "Particle Effects+: Special Effects"
 ENT.Information			= "Fires out traces like bullets, attaching particle effects to each one."
 
-ENT.Spawnable			= true
+ENT.Spawnable			= false
 
 ENT.PEPlus_ShortName		= "Tracer"
 ENT.SpecialEffectRoles		= {
