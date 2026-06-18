@@ -196,7 +196,7 @@ end
 //Need to register this, or for some reason, our constraints will break when duped and refer back to the original entity
 //(i.e. spawn a beam particle, duplicate it, now right-click either pair with the duplicator and it'll copy both of them as if they were constrained together)
 duplicator.RegisterEntityClass("ent_peplus_grip", function(ply, data)
-
+	if not ply:CheckLimit('peplus') then return end
 	local ent = ents.Create("ent_peplus_grip")
 	if !ent:IsValid() then return false end
 
@@ -205,12 +205,6 @@ duplicator.RegisterEntityClass("ent_peplus_grip", function(ply, data)
 	duplicator.DoGenericPhysics(ent, ply, data)
 
 	ent:Spawn()
-
-	//If this ent was duplicated but doesn't have an associated particle entity (i.e. duped in multiplayer, and the particle ent was prevented from spawning) then delete it
-	timer.Simple(0, function()
-		if !IsValid(ent) then return end
-		if !istable(constraint.FindConstraint(ent, "PEPlus_Ent")) and !istable(constraint.FindConstraint(ent, "PEPlus_SpecialEffect")) then ent:Remove() end
-	end)
 
 	return ent
 

@@ -2152,7 +2152,7 @@ end
 
 
 duplicator.RegisterEntityClass("ent_peplus", function(ply, data)
-
+	if not ply:CheckLimit('peplus') then return end
 	//default dtvars for old dupes that don't have them
 	if data.DT.PauseTime == nil then data.DT.PauseTime = -1 end
 	if data.DT.LoopMode == nil then data.DT.LoopMode = 1 end
@@ -2491,10 +2491,7 @@ if SERVER then
 				ply:AddCleanup("peplus", p)
 			end
 		end
-
-		ply:AddCount("peplus", p)
 		return p
-
 	end
 
 	//Console command for contenticon_peplus to spawn particles
@@ -2512,7 +2509,7 @@ if SERVER then
 	end
 
 	function GAMEMODE:PlayerSpawnedParticle(ply, name, pcf, path, ent)
-		--ply:AddCount("peplus", ent)
+		ply:AddCount("peplus", ent)
 	end
 
 end
