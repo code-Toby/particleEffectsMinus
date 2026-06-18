@@ -34,6 +34,8 @@ function ENT:Initialize()
 			g:SetPos(self:GetPos())
 			g:SetAngles(self:GetAngles())
 			g:Spawn()
+
+			setOwner(g, self:GetCreator())
 			constraint.PEPlus_SpecialEffect(self, g, ply)
 			self:SetSpecialEffectDefaults()
 			self.DoneFirstSpawn = true
@@ -323,6 +325,7 @@ if SERVER then
 		g:SetPos(Vector(p.pos.x, p.pos.y, height))
 		g:SetAngles(p.ang)
 
+		setOwner(g, ply)
 		self:SetAttachmentID(0)
 
 		oldconst:RemoveCallOnRemove("PEPlus_Ent_UnmergeOnUndo")
