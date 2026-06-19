@@ -13,6 +13,13 @@ ENT.PEPlus_Grip			= true //lets us detect if an ent is an ent_peplus_grip withou
 
 
 
+local setOwner
+if SERVER then 
+	setOwner = function(ent, ply)
+		if CPPI then ent:CPPISetOwner(ply) 
+		else ent:SetOwner(ply) end
+	end
+end
 
 function ENT:Initialize()
 
@@ -199,6 +206,8 @@ duplicator.RegisterEntityClass("ent_peplus_grip", function(ply, data)
 	if not ply:CheckLimit('peplus') then return end
 	local ent = ents.Create("ent_peplus_grip")
 	if !ent:IsValid() then return false end
+
+	setOwner(ent, ply)
 
 	//duplicator.GenericDuplicatorFunction(ply, data)
 	duplicator.DoGeneric(ent, data)

@@ -17,6 +17,13 @@ ENT.Spawnable			= false
 ENT.PEPlus_SpecialEffect	= true
 
 
+local setOwner
+if SERVER then 
+	setOwner = function(ent, ply)
+		if CPPI then ent:CPPISetOwner(ply) 
+		else ent:SetOwner(ply) end
+	end
+end
 
 local function setOwner(ent, ply)
 	if SERVER then
@@ -45,6 +52,7 @@ function ENT:Initialize()
 			constraint.PEPlus_SpecialEffect(self, g, ply)
 			self:SetSpecialEffectDefaults()
 			self.DoneFirstSpawn = true
+			setOwner(self, self:GetCreator())
 		end
 	end
 
@@ -323,6 +331,7 @@ if SERVER then
 		local g = ents.Create("ent_peplus_grip")
 		if !IsValid(g) then return false end
 		g:Spawn()
+		setOwner(g, ply)
 
 		local p = self:GetCPointPos()
 		local _, bboxtop1 = ent:GetRotatedAABB(ent:GetCollisionBounds())
@@ -661,6 +670,7 @@ if SERVER then
 		ent.IsBlank = self.IsBlank //this is the only functional change from base_entity's SpawnFunction; used by blank variants
 		ent:Spawn()
 		ent:Activate()
+		setOwner(ent, ply)
 
 		ent:DropToFloor()
 		--ply:AddCount("peplus", ent)
